@@ -7,25 +7,23 @@ In this case, it's using the official Node.js version 16 image as the starting p
 This line sets the working directory within the container to /app.
 Any subsequent commands will be executed relative to this directory.
 
-Dockerfile
-Copy code
-COPY package*.json ./
+3. COPY package*.json ./
 This line copies the package.json and package-lock.json files from the host machine (the directory where the Dockerfile is located) to the /app directory inside the container. These files are necessary for installing dependencies with npm.
 
-3. RUN npm install --production
+4. RUN npm install --production
 This line runs npm install --production inside the container.
 It installs the dependencies listed in package.json, excluding those listed under the devDependencies section.
 The --production flag ensures that only production dependencies are installed, omitting any packages intended for development purposes.
 
-4. COPY . .
+5. COPY . .
 This line copies the rest of the application code from the host machine to the /app directory inside the container.
 This includes all files and directories present in the same directory as the Dockerfile.
 
-5. EXPOSE 5000
+6. EXPOSE 5000
 This line exposes port 5000 on the Docker container.
 It informs Docker that the container will listen on port 5000 at runtime, allowing external connections to reach the client tier application.
 
-6. CMD ["npm", "start"]
+7. CMD ["npm", "start"]
 This line specifies the default command to run when the container starts.
 In this case, it runs npm start, assuming that this script is defined in the package.json file and is responsible for starting the client tier application.
 
